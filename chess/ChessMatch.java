@@ -18,7 +18,8 @@ public class ChessMatch {
     private boolean checkMate;
     private ChessPiece enPassantVulnerable;
     private ChessPiece promoted;
-
+    /* o uso de variáveis de uma classe abstrata pode ser usado para tratar
+       as subclasses dessa classe abstrata de forma genérica */
     private List<Piece> piecesOnTheBoard = new ArrayList<>();
     private List<Piece> capturedPieces = new ArrayList<>();
 
@@ -72,8 +73,9 @@ public class ChessMatch {
     public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
-        validateSourcePosition(source);
-        validateTargetPosition(source, target);
+        /* as funções apenas lançam a exceção caso algo dê errado */
+        validateSourcePosition(source);  // validação da posíção de origem
+        validateTargetPosition(source, target); // validação da posição alvo
         Piece capturedPiece = makeMove(source, target);
 
         if (testCheck(currentPlayer)) {
@@ -139,7 +141,7 @@ public class ChessMatch {
     }
 
     private Piece makeMove(Position source, Position target) {
-        ChessPiece p = (ChessPiece)board.removePiece(source);
+        ChessPiece p = (ChessPiece)board.removePiece(source); // downcasting
         p.increaseMoveCount();
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
@@ -232,19 +234,19 @@ public class ChessMatch {
     }
 
     private void validateSourcePosition(Position position) {
-        if (!board.thereIsAPiece(position)) {
+        if (!board.thereIsAPiece(position)) {  // verifica se tem alguma peça nessa posição
             throw new ChessException("There is no piece on source position");
         }
-        if (currentPlayer != ((ChessPiece)board.piece(position)).getColor()) {
+        if (currentPlayer != ((ChessPiece)board.piece(position)).getColor()) { // verifica se a peça é do jogador
             throw new ChessException("The chosen piece is not yours");
         }
-        if (!board.piece(position).isThereAnyPossibleMove()) {
+        if (!board.piece(position).isThereAnyPossibleMove()) { // verifica se há como mover a peça desejada
             throw new ChessException("There is no possible moves for the chosen piece");
         }
     }
 
     private void validateTargetPosition(Position source, Position target) {
-        if (!board.piece(source).possibleMove(target)) {
+        if (!board.piece(source).possibleMove(target)) {  // verifica se a peça pode ser movida para o local desejado
             throw new ChessException("The chosen piece can't move to target position");
         }
     }
