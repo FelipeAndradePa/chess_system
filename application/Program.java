@@ -15,8 +15,8 @@ public class Program {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        ChessMatch chessMatch = new ChessMatch();
-        List<ChessPiece> captured = new ArrayList<>();
+        ChessMatch chessMatch = new ChessMatch(); // Classe que representa a partida de xadrez
+        List<ChessPiece> captured = new ArrayList<>(); // Lista de peças que estarão capturadas no jogo
 
         while (!chessMatch.getCheckMate()) {
             try {
