@@ -1,4 +1,6 @@
 package board;
+
+// Piece é uma classe abstrata pois as peças são instanciadas na criação do tabuleiro (board) e não diretamente
 public abstract class Piece {
 
     protected Position position;
@@ -12,6 +14,7 @@ public abstract class Piece {
     protected Board getBoard() {
         return board;
     }
+
     public abstract boolean[][] possibleMoves();
 
     public boolean possibleMove(Position position) {

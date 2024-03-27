@@ -1,4 +1,5 @@
 package board;
+
 public class Board {
 
     private int rows;
@@ -11,7 +12,7 @@ public class Board {
         }
         this.rows = rows;
         this.columns = columns;
-        pieces = new Piece[rows][columns];
+        pieces = new Piece[rows][columns]; // Matriz de peças
     }
 
     public int getRows() {
